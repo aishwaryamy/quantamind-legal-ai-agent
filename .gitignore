@@ -1,0 +1,23 @@
+# Exclude large model files
+models/
+*.bin
+*.safetensors
+*.h5
+*.onnx
+
+# Exclude virtual environment
+venv/
+.venv/
+
+# Exclude large data files
+data/CUAD_v1.json
+data/faiss_index
+data/processed_cuad.json
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# System files
+.DS_Store
