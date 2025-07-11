@@ -77,7 +77,7 @@ If you prefer step-by-step control:
    ```
 
 4. **Download CUAD Dataset**
-   - Visit: https://github.com/TheAtticusProject/cuad/tree/main/data
+   - Visit: [https://zenodo.org/records/4595826]
    - Click on `CUAD_v1.json` 
    - Click "Download" or "Raw" button to download the file
    - Move the downloaded file to your `data/` directory
