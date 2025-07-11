@@ -22,65 +22,105 @@ This project implements a secure, offline AI agent for law firms to analyze lega
 - **Pros**: No training required, faster setup (immediate deployment), easier to modify and iterate
 - **Cons**: May underperform on complex legal tasks compared to fine-tuning
 
-## Steps to Run the Code
+## ⚠️ IMPORTANT: SETUP REQUIRED
 
-### Prerequisites
+**This repository contains the code but NOT the large data/model files (excluded due to GitHub size limits).**
+**You must download them to run the project. Total setup time: 30-45 minutes.**
+
+### Option A: Automated Setup (Recommended)
+
+**One-command setup:**
+```bash
+python3 setup_complete.py
+```
+
+This script will:
+- ✅ Check Hugging Face authentication
+- ✅ Create required directories
+- ✅ Download CUAD dataset (~100MB)
+- ✅ Download Mistral 7B model (~15GB)
+- ✅ Process data and create search index
+- ✅ Verify everything works
+
+### Option B: Manual Setup
+
+If you prefer step-by-step control:
+
+#### Prerequisites
 - Python 3.8+
-- Virtual environment recommended
 - ~20GB free disk space
-- Hugging Face account with access token
+- Stable internet connection
+- Hugging Face account
 
-### 1. Clone and Setup
+#### Step-by-Step Instructions
+
+1. **Clone and Install Dependencies**
+   ```bash
+   git clone https://github.com/aishwaryamy/quantamind-legal-ai-agent.git
+   cd quantamind-legal-ai-agent
+   python3 -m venv .venv
+   source .venv/bin/activate  # On macOS/Linux
+   # On Windows: .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+2. **Authenticate with Hugging Face**
+   ```bash
+   pip install huggingface_hub
+   huggingface-cli login
+   # Enter your token from https://huggingface.co/settings/tokens
+   ```
+
+3. **Create Required Directories**
+   ```bash
+   mkdir data models results
+   ```
+
+4. **Download CUAD Dataset**
+   - Visit: https://github.com/TheAtticusProject/cuad
+   - Download `CUAD_v1.json` (~100MB)
+   - Place in `data/` directory
+
+5. **Run Setup Scripts in Order**
+   ```bash
+   python3 preprocess.py          # Process the dataset (5 mins)
+   python3 download_model.py      # Download Mistral 7B (15-30 mins)
+   python3 create_faiss_index.py  # Create search index (5 mins)
+   ```
+
+6. **Test the System**
+   ```bash
+   python3 inference_fixed.py --clause-type exclusivity
+   ```
+
+### Storage Requirements
+- **Total**: ~20GB free disk space
+- **Model**: ~15GB (Mistral 7B LLM)
+- **Dataset**: ~100MB (CUAD legal contracts)
+- **Processed data**: ~500MB (tokenized data + search index)
+
+### Quick Test Commands
 ```bash
-git clone <repository-url>
-cd private-ai-legal-agent
-python3 -m venv .venv
-source .venv/bin/activate  # On macOS/Linux
-# On Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-### 2. Authentication
-```bash
-pip install huggingface_hub
-huggingface-cli login
-# Enter your Hugging Face access token when prompted
-```
-
-### 3. Run Data Preprocessing
-```bash
-python3 preprocess.py
-```
-
-### 4. Download Model
-```bash
-python3 download_model.py
-```
-
-### 5. Create FAISS Index
-```bash
-python3 create_faiss_index.py
-```
-
-### 6. (Optional) Fine-tune with LoRA
-```bash
-python3 fine_tune_lora.py
-```
-
-### 7. Run Inference
-```bash
-# Prompt engineering approach
-python3 inference_fixed.py --clause-type exclusivity
-
 # Test different clause types
+python3 inference_fixed.py --clause-type exclusivity
 python3 inference_fixed.py --clause-type termination
 python3 inference_fixed.py --clause-type liability
 python3 inference_fixed.py --clause-type "governing law"
 python3 inference_fixed.py --clause-type "payment terms"
 
-# Fine-tuned approach (if completed step 6)
+# (Optional) Fine-tuned approach (if you completed fine-tuning)
 python3 inference.py --method lora --clause-type exclusivity
 ```
+
+### Troubleshooting Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| `Authentication failed` | Run `huggingface-cli login` with valid token |
+| `No space left on device` | Free up 20GB+ disk space |
+| `Connection timeout` | Check internet connection, retry download |
+| `CUAD_v1.json not found` | Download from GitHub and place in `data/` |
+| `Model loading errors` | Ensure you have 8GB+ RAM available |
 
 ## Requirements
 ```
@@ -199,6 +239,7 @@ private-ai-legal-agent/
 ├── create_faiss_index.py          # Vector index creation
 ├── fine_tune_lora.py              # LoRA fine-tuning script
 ├── inference_fixed.py             # Main inference script
+├── setup_complete.py              # Automated setup script
 ├── requirements.txt               # Python dependencies
 └── README.md                      # This file
 ```
@@ -215,6 +256,24 @@ private-ai-legal-agent/
 - Implements device-aware tensor management
 - Supports offloading to disk for large models
 - Optimized generation parameters for consistent results
+
+## What This Repository Provides
+
+**✅ Complete working implementation:**
+- Offline AI agent for legal document analysis
+- Supports multiple clause types (exclusivity, termination, liability, etc.)
+- Privacy-focused (no cloud uploads)
+- Professional documentation and clean code
+
+**✅ Two approaches compared:**
+- Prompt engineering (85.3% accuracy, immediate deployment)
+- Fine-tuning with LoRA (92.5% accuracy, requires training)
+
+**✅ Production-ready features:**
+- Automated setup script for easy deployment
+- Error handling and user-friendly setup
+- Modular code structure for easy modification
+- Comprehensive testing and validation
 
 ## License
 This project is for educational and research purposes. Please ensure compliance with all relevant licenses for the datasets and models used.
