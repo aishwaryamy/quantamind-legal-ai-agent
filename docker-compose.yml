@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  legal-ai-agent:
+    build: .
+    image: quantamind/legal-ai-agent:latest
+    container_name: legal-ai-agent
+    volumes:
+      # Mount data directory for persistent storage
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./results:/app/results
+      - ./logs:/app/logs
+      # Mount cache for Hugging Face models
+      - huggingface-cache:/app/cache/huggingface
+      - transformers-cache:/app/cache/transformers
+    environment:
+      - PYTHONUNBUFFERED=1
+      - HF_HOME=/app/cache/huggingface
+      - TRANSFORMERS_CACHE=/app/cache/transformers
+      # Add your Hugging Face token here (or use .env file)
+      - HF_TOKEN=${HF_TOKEN}
+    deploy:
+      resources:
+        limits:
+          memory: 16G
+        reservations:
+          memory: 8G
+    # Enable GPU support if available
+    # runtime: nvidia
+    # environment:
+    #   - NVIDIA_VISIBLE_DEVICES=all
+    ports:
+      - "8000:8000"
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+
+  # Optional: Setup service for initial setup
+  setup:
+    build: .
+    image: quantamind/legal-ai-agent:latest
+    container_name: legal-ai-setup
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./results:/app/results
+      - ./logs:/app/logs
+      - huggingface-cache:/app/cache/huggingface
+      - transformers-cache:/app/cache/transformers
+    environment:
+      - PYTHONUNBUFFERED=1
+      - HF_HOME=/app/cache/huggingface
+      - TRANSFORMERS_CACHE=/app/cache/transformers
+      - HF_TOKEN=${HF_TOKEN}
+    command: python3 setup_complete.py
+    profiles:
+      - setup
+
+volumes:
+  huggingface-cache:
+  transformers-cache:

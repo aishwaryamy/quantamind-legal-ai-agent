@@ -1,0 +1,55 @@
+{
+  "data": [
+    {
+      "title": "Software License Agreement",
+      "paragraphs": [
+        {
+          "text": "This Agreement grants Company exclusive rights to distribute the Product in the Territory. During the Term, Company shall not compete with similar products or engage in any activities that would conflict with this exclusivity arrangement.",
+          "labels": ["Exclusivity", "Non-Compete"]
+        },
+        {
+          "text": "Either party may terminate this Agreement with thirty (30) days written notice. Upon termination, all rights and obligations shall cease, except for those provisions that by their nature should survive termination.",
+          "labels": ["Termination", "Notice Period"]
+        },
+        {
+          "text": "Company's liability under this Agreement shall not exceed the total amount paid by Client in the twelve (12) months preceding the claim. In no event shall Company be liable for indirect, incidental, or consequential damages.",
+          "labels": ["Liability", "Limitation of Liability"]
+        }
+      ]
+    },
+    {
+      "title": "Service Agreement",
+      "paragraphs": [
+        {
+          "text": "This Agreement shall be governed by and construed in accordance with the laws of the State of California, without regard to its conflict of laws principles. Any disputes shall be resolved in the courts of San Francisco County.",
+          "labels": ["Governing Law", "Jurisdiction"]
+        },
+        {
+          "text": "Client agrees to pay all fees within thirty (30) days of invoice date. Late payments shall incur a service charge of 1.5% per month on the outstanding balance.",
+          "labels": ["Payment Terms", "Late Fees"]
+        },
+        {
+          "text": "Provider shall maintain the confidentiality of all Client information and shall not disclose such information to third parties without prior written consent, except as required by law.",
+          "labels": ["Confidentiality", "Non-Disclosure"]
+        }
+      ]
+    },
+    {
+      "title": "Employment Agreement",
+      "paragraphs": [
+        {
+          "text": "Employee agrees that during employment and for a period of two (2) years thereafter, Employee shall not directly or indirectly compete with Company's business within a fifty (50) mile radius of Company's offices.",
+          "labels": ["Non-Compete", "Exclusivity", "Geographic Restriction"]
+        },
+        {
+          "text": "Company may terminate Employee's employment at any time with or without cause upon two (2) weeks written notice. Employee may terminate employment with two (2) weeks notice.",
+          "labels": ["Termination", "At-Will Employment"]
+        },
+        {
+          "text": "Employee shall indemnify and hold harmless Company from any claims arising from Employee's willful misconduct or breach of this Agreement. Company's liability for wrongful termination shall be limited to statutory requirements.",
+          "labels": ["Indemnification", "Liability", "Limitation of Liability"]
+        }
+      ]
+    }
+  ]
+}
